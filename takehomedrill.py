@@ -14,12 +14,22 @@ def send_post_request(pin):
         client_socket.connect((host, port))
         
         client_socket.sendall(request.encode())
+
+        response = b""
+        while True:
+            data = client_socket.recv(4096)
+            if not data:
+                break
+            response += data
+        
         client_socket.close()
 
+        return response.decode(errors="ignore")
+
     except socket.error as e:
-        print(f"Socket error: {e}")
+        return f"Socket error: {e}"
     except Exception as e:
-        print(f"An error occurred: {e}")
+        return f"An error occurred: {e}"
 
 if __name__ == "__main__":
-    send_post_request(0)
+    print(send_post_request(0))
