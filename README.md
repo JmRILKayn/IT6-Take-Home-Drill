@@ -19,3 +19,5 @@ This project is a small Python script that brute-forces a 3-digit PIN by sending
 ## Files
 - takehomedrill.py: The main Python script that runs the attack.
 - README.md: This file explaining what’s going on.
+
+Youtube Video Presentation Link: **https://www.youtube.com/watch?v=tOIOrmxcxQk&ab_channel=Kayn**
